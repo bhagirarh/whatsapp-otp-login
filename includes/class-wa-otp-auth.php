@@ -45,12 +45,13 @@ class WA_OTP_Auth {
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'nonce'    => wp_create_nonce( 'wa_otp_nonce' ),
 			'i18n'     => array(
-				'sending'         => __( 'Sending code…', 'whatsapp-otp-login' ),
-				'sent'            => __( 'Code sent! Check WhatsApp.', 'whatsapp-otp-login' ),
-				'verifying'       => __( 'Verifying…', 'whatsapp-otp-login' ),
-				'invalid_phone'   => __( 'Enter a valid WhatsApp number with country code.', 'whatsapp-otp-login' ),
-				'generic_error'   => __( 'Something went wrong. Please try again.', 'whatsapp-otp-login' ),
-				'resend_wait'     => __( 'You can resend in %d s', 'whatsapp-otp-login' ),
+				'sending'         => __( 'Sending code…', 'otp-login-by-waloops' ),
+				'sent'            => __( 'Code sent! Check WhatsApp.', 'otp-login-by-waloops' ),
+				'verifying'       => __( 'Verifying…', 'otp-login-by-waloops' ),
+				'invalid_phone'   => __( 'Enter a valid WhatsApp number with country code.', 'otp-login-by-waloops' ),
+				'generic_error'   => __( 'Something went wrong. Please try again.', 'otp-login-by-waloops' ),
+				/* translators: %d: seconds remaining before the resend button is enabled again. This string is a JS sprintf-style template — otp-frontend.js does the actual %d substitution. */
+				'resend_wait'     => __( 'You can resend in %d s', 'otp-login-by-waloops' ),
 			),
 		) );
 	}
@@ -103,11 +104,12 @@ class WA_OTP_Auth {
 	public static function ajax_send() {
 		self::check_ajax_nonce();
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified above via self::check_ajax_nonce() -> check_ajax_referer(); PHPCS can't trace the indirection.
 		$phone = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
 		$phone = preg_replace( '/[^0-9]/', '', $phone );
 
 		if ( strlen( $phone ) < 8 ) {
-			wp_send_json_error( array( 'message' => __( 'Enter a valid WhatsApp number with country code.', 'whatsapp-otp-login' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Enter a valid WhatsApp number with country code.', 'otp-login-by-waloops' ) ) );
 		}
 
 		$result = WA_OTP_Api_Client::send_otp( $phone );
@@ -116,7 +118,7 @@ class WA_OTP_Auth {
 			wp_send_json_error( array( 'message' => $result->get_error_message() ) );
 		}
 		if ( empty( $result['success'] ) ) {
-			wp_send_json_error( array( 'message' => $result['error'] ?? __( 'Could not send the code. Please try again.', 'whatsapp-otp-login' ) ) );
+			wp_send_json_error( array( 'message' => $result['error'] ?? __( 'Could not send the code. Please try again.', 'otp-login-by-waloops' ) ) );
 		}
 
 		wp_send_json_success( array( 'expires_in' => $result['expires_in'] ?? 300 ) );
@@ -125,11 +127,13 @@ class WA_OTP_Auth {
 	public static function ajax_verify() {
 		self::check_ajax_nonce();
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified above via self::check_ajax_nonce() -> check_ajax_referer(); PHPCS can't trace the indirection.
 		$phone = isset( $_POST['phone'] ) ? preg_replace( '/[^0-9]/', '', sanitize_text_field( wp_unslash( $_POST['phone'] ) ) ) : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- same as above, still covered by self::check_ajax_nonce().
 		$code = isset( $_POST['code'] ) ? sanitize_text_field( wp_unslash( $_POST['code'] ) ) : '';
 
 		if ( ! $phone || ! $code ) {
-			wp_send_json_error( array( 'message' => __( 'Missing phone or code.', 'whatsapp-otp-login' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Missing phone or code.', 'otp-login-by-waloops' ) ) );
 		}
 
 		$result = WA_OTP_Api_Client::verify_otp( $phone, $code );
@@ -138,13 +142,14 @@ class WA_OTP_Auth {
 			wp_send_json_error( array( 'message' => $result->get_error_message() ) );
 		}
 		if ( empty( $result['verified'] ) ) {
-			wp_send_json_error( array( 'message' => $result['error'] ?? __( 'Incorrect or expired code.', 'whatsapp-otp-login' ) ) );
+			wp_send_json_error( array( 'message' => $result['error'] ?? __( 'Incorrect or expired code.', 'otp-login-by-waloops' ) ) );
 		}
 
 		// Verified with our backend — now resolve/create the local WP user
 		// and complete the login. Registration screens allow account
 		// creation; the plain login form does not (a phone with no linked
 		// account there is told to register first).
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- same request already verified by self::check_ajax_nonce() at the top of this method.
 		$is_registration_context = isset( $_POST['context'] ) && 'register' === $_POST['context'];
 		$existing_user = WA_OTP_User::find_by_phone( $phone );
 		if ( $existing_user ) {
@@ -152,7 +157,7 @@ class WA_OTP_Auth {
 		} elseif ( $is_registration_context ) {
 			$user = WA_OTP_User::find_or_create( $phone, true );
 		} else {
-			$user = new WP_Error( 'wa_otp_no_account', __( 'No account is linked to this WhatsApp number yet. Please register first.', 'whatsapp-otp-login' ) );
+			$user = new WP_Error( 'wa_otp_no_account', __( 'No account is linked to this WhatsApp number yet. Please register first.', 'otp-login-by-waloops' ) );
 		}
 
 		if ( is_wp_error( $user ) ) {

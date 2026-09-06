@@ -1,8 +1,8 @@
-=== WALoops – WhatsApp OTP Login ===
+=== OTP Login by WALoops ===
 Contributors: waloops
 Tags: whatsapp, otp, login, two factor, woocommerce
 Requires at least: 5.8
-Tested up to: 6.6
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
@@ -16,7 +16,7 @@ WhatsApp OTP Login adds a one-time-password login and registration option — de
 
 **Free forever, 100 OTPs/month**
 
-Sign up for a free API key straight from the plugin's settings page (no credit card) and start sending real WhatsApp OTPs from WALoops' shared WhatsApp number immediately.
+Get a free API key by creating a WALoops account from the plugin's settings page (no credit card) and start sending real WhatsApp OTPs from WALoops' shared WhatsApp number immediately.
 
 = Features =
 
@@ -25,14 +25,14 @@ Sign up for a free API key straight from the plugin's settings page (no credit c
 * Three built-in front-end designs: Modern, Minimal, Card
 * Free plan: 100 OTPs/month from our shared WhatsApp number
 * Introduction plan ($5/mo): 1,000 OTPs/month, use our number or connect your own
-* Starter plan ($9.99/mo): unlimited OTPs, using your own connected WhatsApp Business number
+* Starter Ecommerce plan ($9.99/mo): unlimited OTPs, using your own connected WhatsApp Business number
 * Works out of the box — no Meta Developer account needed on the Free or Introduction (shared-number) plans
-* Fully translatable (text domain: `whatsapp-otp-login`)
+* Fully translatable (text domain: `otp-login-by-waloops`)
 
 = How it works =
 
 1. Install and activate the plugin.
-2. Go to **Settings > WhatsApp OTP Login** and click **Get Free API Key**.
+2. Go to **Settings > WhatsApp OTP Login** and click **Create a free WALoops account** — you'll land straight on your API key. Paste it into the field on this same settings page.
 3. Pick where the OTP option should appear (login page, registration page, WooCommerce checkout) — or drop the `[wa_otp_login]` shortcode anywhere.
 4. Done. Visitors can now log in or register with just their WhatsApp number.
 
@@ -42,7 +42,7 @@ This plugin connects to the WALoops WhatsApp OTP API (**https://app.waloops.com/
 
 What is sent, and when:
 
-* **When you click "Get Free API Key"**: the email address you enter and your site's URL are sent to `https://app.waloops.com/api/otp/signup.php`, to create your account and email you an API key.
+* **When you click "Create a free WALoops account"**: you're taken to app.waloops.com to register/log in — nothing is sent from this plugin at that point. Once you're logged in there, your API key is generated and shown to you to paste back into this settings page.
 * **When a visitor requests a login code**: the phone number they entered is sent to `https://app.waloops.com/api/otp/send.php`, which triggers a WhatsApp message to that number.
 * **When a visitor submits a code**: the phone number and the 6-digit code they entered are sent to `https://app.waloops.com/api/otp/verify.php` to check whether it's correct.
 * **On the settings page**: your account's monthly usage is read from `https://app.waloops.com/api/otp/usage.php`, and — only if you choose to connect your own WhatsApp Business number — your Meta access token and phone number ID are sent to `https://app.waloops.com/api/otp/connect_number.php` to verify and store them for your account.
@@ -53,7 +53,7 @@ No data is sent to any other third party. See WALoops' [Terms of Service](https:
 
 = Do I need a Meta/Facebook Developer account? =
 
-No — not on the Free or Introduction plans, where you can send from WALoops' shared WhatsApp number. Connecting your own number (optional on Introduction, required on Starter) does require your own WhatsApp Business Cloud API app.
+No — not on the Free or Introduction plans, where you can send from WALoops' shared WhatsApp number. Connecting your own number (optional on Introduction, required on Starter Ecommerce) does require your own WhatsApp Business Cloud API app.
 
 = What happens when I run out of free OTPs for the month? =
 
@@ -73,7 +73,7 @@ Phone numbers and OTP codes are transmitted over HTTPS and are used solely to de
 
 == Screenshots ==
 
-1. Settings page — get your free API key and configure your OTP options.
+1. Settings page — usage, API key, message style, and where the OTP form shows.
 2. The "Modern" front-end OTP form on a login page.
 3. The "Card" front-end OTP form style.
 4. Usage dashboard showing your monthly OTP quota.

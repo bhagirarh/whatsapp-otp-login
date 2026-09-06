@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       WALoops – WhatsApp OTP Login
+ * Plugin Name:       OTP Login by WALoops
  * Plugin URI:        https://waloops.com/wordpress-otp-login
  * Description:       Add "Login / Register with WhatsApp OTP" to your WordPress login, registration and WooCommerce checkout screens. 100 OTP messages free every month.
  * Version:           1.0.0
@@ -10,7 +10,7 @@
  * Author URI:        https://waloops.com
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       whatsapp-otp-login
+ * Text Domain:       otp-login-by-waloops
  * Domain Path:       /languages
  *
  * This plugin sends the phone number entered at login/registration to the
@@ -59,11 +59,6 @@ function wa_otp_login_activate() {
 	}
 }
 register_activation_hook( __FILE__, 'wa_otp_login_activate' );
-
-function wa_otp_login_load_textdomain() {
-	load_plugin_textdomain( 'whatsapp-otp-login', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-}
-add_action( 'plugins_loaded', 'wa_otp_login_load_textdomain' );
 
 /**
  * Reads the merged settings array (defaults + saved options) — the single

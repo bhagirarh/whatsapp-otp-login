@@ -4,7 +4,7 @@
 
 Password-free login, two-factor verification, and WooCommerce checkout confirmation, delivered over WhatsApp instead of SMS or email. Works alongside your existing username/password login — it's an added option, never a replacement.
 
-[![WordPress Plugin](https://img.shields.io/badge/WordPress-Plugin-blue.svg)](https://wordpress.org/plugins/whatsapp-otp-login/) [![License: GPLv2+](https://img.shields.io/badge/license-GPLv2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html) [![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4.svg)](https://www.php.net) [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-21759b.svg)](https://wordpress.org)
+[![WordPress Plugin](https://img.shields.io/badge/WordPress-Plugin-blue.svg)](https://wordpress.org/plugins/otp-login-by-waloops/) [![License: GPLv2+](https://img.shields.io/badge/license-GPLv2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html) [![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4.svg)](https://www.php.net) [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-21759b.svg)](https://wordpress.org)
 
 ## Why WhatsApp OTP instead of SMS or email OTP?
 
@@ -20,7 +20,7 @@ Password-free login, two-factor verification, and WooCommerce checkout confirmat
 - 🎨 **3 built-in form designs** — Modern, Minimal, Card — pick one in Settings, no CSS required
 - 🆓 **100 free WhatsApp OTPs every month** — no credit card, real messages from day one
 - 📈 **Scales with you** — 1,000/month (Introduction, $5/mo) or unlimited (Starter, $9.99/mo, your own connected WhatsApp number)
-- 🌍 **Translation-ready** — text domain `whatsapp-otp-login`
+- 🌍 **Translation-ready** — text domain `otp-login-by-waloops`
 - 🔒 **Secure by design** — hashed, single-use, expiring codes; nonce-verified AJAX; capability-checked admin actions
 
 ## Screenshots
@@ -34,7 +34,7 @@ Password-free login, two-factor verification, and WooCommerce checkout confirmat
 ## Installation
 
 1. **From WordPress**: Plugins → Add New → search "WALoops – WhatsApp OTP Login" → Install → Activate. *(Once published to wordpress.org/plugins/.)*
-2. **Manual**: download [`whatsapp-otp-login.zip`](whatsapp-otp-login.zip) from this repo, then Plugins → Add New → Upload Plugin.
+2. **Manual**: download the zip from [waloops.com/wordpress-otp-login](https://waloops.com/wordpress-otp-login), then Plugins → Add New → Upload Plugin.
 3. Go to **Settings → WhatsApp OTP Login** and click **Get Free API Key**.
 4. Choose where the OTP option appears (login page, registration, WooCommerce checkout) — or use the shortcode.
 
@@ -81,15 +81,15 @@ More in [`readme.txt`](readme.txt) (the canonical WordPress.org-format FAQ/chang
 ## Development
 
 ```
-whatsapp-otp-login/
-├── whatsapp-otp-login.php   # Main plugin file
+otp-login-by-waloops/
+├── otp-login-by-waloops.php   # Main plugin file
 ├── includes/                # API client, auth flow, user mapping
 ├── admin/                   # Settings page
 ├── templates/               # 3 front-end form designs
 └── assets/                  # CSS/JS
 ```
 
-Contributions and issues welcome. See [`SUBMISSION-GUIDE.md`](SUBMISSION-GUIDE.md) for the WordPress.org publishing process this plugin follows.
+Contributions and issues welcome. See [`SUBMISSION-GUIDE.md`](../SUBMISSION-GUIDE.md) for the WordPress.org publishing process this plugin follows.
 
 ## License
 

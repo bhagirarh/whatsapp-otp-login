@@ -87,7 +87,7 @@ class WA_OTP_Api_Client {
 
 		$decoded = json_decode( wp_remote_retrieve_body( $response ), true );
 		if ( ! is_array( $decoded ) ) {
-			return new WP_Error( 'wa_otp_bad_response', __( 'The WhatsApp OTP service returned an unexpected response.', 'whatsapp-otp-login' ) );
+			return new WP_Error( 'wa_otp_bad_response', __( 'The WhatsApp OTP service returned an unexpected response.', 'otp-login-by-waloops' ) );
 		}
 
 		return $decoded;

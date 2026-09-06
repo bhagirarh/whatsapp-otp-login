@@ -1,9 +1,11 @@
 <?php
 /**
- * Settings > WhatsApp OTP Login admin page: API key (+ free-key signup),
- * message template picker, front-end form style picker with live preview,
- * where the form appears, own-number connection (locked on Free, optional
- * on Introduction, required on Starter), and a usage widget.
+ * Settings > WhatsApp OTP Login admin page: API key (paste it in after
+ * getting one from your WALoops account — see the "Get your free API key"
+ * link on this page), message template picker, front-end form style picker
+ * with live preview, where the form appears, own-number connection (locked
+ * on Free, optional on Introduction, required on Starter Ecommerce), and a
+ * usage widget.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,14 +22,13 @@ class WA_OTP_Settings {
 		add_action( 'admin_post_wa_otp_save_settings', array( __CLASS__, 'handle_save' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_admin_assets' ) );
 
-		add_action( 'wp_ajax_wa_otp_admin_signup', array( __CLASS__, 'ajax_signup' ) );
 		add_action( 'wp_ajax_wa_otp_admin_connect_number', array( __CLASS__, 'ajax_connect_number' ) );
 	}
 
 	public static function add_menu() {
 		add_options_page(
-			__( 'WhatsApp OTP Login', 'whatsapp-otp-login' ),
-			__( 'WhatsApp OTP Login', 'whatsapp-otp-login' ),
+			__( 'WhatsApp OTP Login', 'otp-login-by-waloops' ),
+			__( 'WhatsApp OTP Login', 'otp-login-by-waloops' ),
 			'manage_options',
 			self::PAGE_SLUG,
 			array( __CLASS__, 'render_page' )
@@ -49,7 +50,7 @@ class WA_OTP_Settings {
 
 	public static function handle_save() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to do this.', 'whatsapp-otp-login' ) );
+			wp_die( esc_html__( 'You do not have permission to do this.', 'otp-login-by-waloops' ) );
 		}
 		check_admin_referer( 'wa_otp_save_settings' );
 
@@ -70,38 +71,10 @@ class WA_OTP_Settings {
 		exit;
 	}
 
-	public static function ajax_signup() {
-		check_ajax_referer( 'wa_otp_admin_nonce', 'nonce' );
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'whatsapp-otp-login' ) ) );
-		}
-
-		$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
-		if ( ! is_email( $email ) ) {
-			wp_send_json_error( array( 'message' => __( 'Enter a valid email address.', 'whatsapp-otp-login' ) ) );
-		}
-
-		$result = WA_OTP_Api_Client::signup( $email, home_url() );
-		if ( is_wp_error( $result ) ) {
-			wp_send_json_error( array( 'message' => $result->get_error_message() ) );
-		}
-		if ( empty( $result['success'] ) ) {
-			wp_send_json_error( array( 'message' => $result['error'] ?? __( 'Signup failed.', 'whatsapp-otp-login' ) ) );
-		}
-
-		if ( ! empty( $result['api_key'] ) ) {
-			$settings = wa_otp_login_get_settings();
-			$settings['api_key'] = sanitize_text_field( $result['api_key'] );
-			update_option( self::OPTION_KEY, $settings );
-		}
-
-		wp_send_json_success( array( 'api_key' => $result['api_key'] ?? '' ) );
-	}
-
 	public static function ajax_connect_number() {
 		check_ajax_referer( 'wa_otp_admin_nonce', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'whatsapp-otp-login' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'otp-login-by-waloops' ) ) );
 		}
 
 		$args = array(
@@ -116,7 +89,7 @@ class WA_OTP_Settings {
 			wp_send_json_error( array( 'message' => $result->get_error_message() ) );
 		}
 		if ( empty( $result['success'] ) ) {
-			wp_send_json_error( array( 'message' => $result['error'] ?? __( 'Could not save this number.', 'whatsapp-otp-login' ) ) );
+			wp_send_json_error( array( 'message' => $result['error'] ?? __( 'Could not save this number.', 'otp-login-by-waloops' ) ) );
 		}
 
 		wp_send_json_success( $result );

@@ -3,37 +3,6 @@
 	'use strict';
 
 	$( function () {
-		$( '#wa-otp-signup-btn' ).on( 'click', function () {
-			var $btn = $( this );
-			var email = $( '#wa-otp-signup-email' ).val();
-			var $status = $( '#wa-otp-signup-status' );
-
-			if ( ! email ) {
-				$status.text( 'Enter your email address.' );
-				return;
-			}
-
-			$btn.prop( 'disabled', true );
-			$status.text( 'Creating your account…' );
-
-			$.post( WA_OTP_ADMIN.ajax_url, {
-				action: 'wa_otp_admin_signup',
-				nonce: WA_OTP_ADMIN.nonce,
-				email: email,
-			} ).done( function ( json ) {
-				if ( json && json.success ) {
-					$status.text( 'API key created! Reloading…' );
-					window.location.reload();
-				} else {
-					$status.text( ( json && json.data && json.data.message ) || 'Signup failed.' );
-					$btn.prop( 'disabled', false );
-				}
-			} ).fail( function () {
-				$status.text( 'Could not reach the server. Try again.' );
-				$btn.prop( 'disabled', false );
-			} );
-		} );
-
 		$( '#wa-otp-connect-number-btn' ).on( 'click', function () {
 			var $btn = $( this );
 			var $status = $( '#wa-otp-connect-status' );

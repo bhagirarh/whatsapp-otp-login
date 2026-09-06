@@ -16,9 +16,13 @@ class WA_OTP_User {
 	 * Finds the WP_User already linked to $phone, or null.
 	 */
 	public static function find_by_phone( $phone ) {
+		// get_users() by a single-value meta lookup is the documented WP API
+		// for this; no indexed alternative exists without introducing a
+		// custom table for what's normally a small user set (OTP-plugin
+		// subscribers, not the whole site).
 		$users = get_users( array(
-			'meta_key'   => self::META_KEY,
-			'meta_value' => $phone,
+			'meta_key'   => self::META_KEY, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			'meta_value' => $phone, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 			'number'     => 1,
 		) );
 		return $users ? $users[0] : null;
@@ -35,7 +39,7 @@ class WA_OTP_User {
 			return $user;
 		}
 		if ( ! $create_if_missing ) {
-			return new WP_Error( 'wa_otp_no_account', __( 'No account is linked to this WhatsApp number yet. Please register first.', 'whatsapp-otp-login' ) );
+			return new WP_Error( 'wa_otp_no_account', __( 'No account is linked to this WhatsApp number yet. Please register first.', 'otp-login-by-waloops' ) );
 		}
 
 		$username = 'wa_' . preg_replace( '/[^0-9]/', '', $phone );
@@ -75,6 +79,7 @@ class WA_OTP_User {
 		wp_set_current_user( $user->ID );
 		wp_set_auth_cookie( $user->ID, true );
 		/** This action is documented in wp-includes/user.php */
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- 'wp_login' is WordPress core's own hook, fired deliberately here (not one this plugin defines) so anything else hooked into a normal login still runs.
 		do_action( 'wp_login', $user->user_login, $user );
 	}
 }

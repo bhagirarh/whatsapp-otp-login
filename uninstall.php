@@ -16,4 +16,5 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 delete_option( 'wa_otp_login_settings' );
 
 global $wpdb;
-$wpdb->delete( $wpdb->usermeta, array( 'meta_key' => 'wa_otp_phone' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- uninstall.php has no caching layer to use, and $wpdb->delete() is the documented way to bulk-remove a plugin's own usermeta on Delete.
+$wpdb->delete( $wpdb->usermeta, array( 'meta_key' => 'wa_otp_phone' ) );
