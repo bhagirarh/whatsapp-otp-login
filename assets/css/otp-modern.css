@@ -1,0 +1,106 @@
+.wa-otp-modern {
+	max-width: 360px;
+	margin: 16px 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.wa-otp-modern__toggle {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+	color: #128C7E;
+	font-weight: 600;
+	font-size: 14px;
+	padding: 10px 14px;
+	border: 1px solid #d9f2ee;
+	background: #f3fbfa;
+	border-radius: 12px;
+	transition: background 0.15s ease;
+}
+.wa-otp-modern__toggle:hover {
+	background: #e8f7f4;
+}
+.wa-otp-modern__icon {
+	color: #25D366;
+	display: inline-flex;
+}
+.wa-otp-modern__body {
+	margin-top: 12px;
+	padding: 16px;
+	border-radius: 16px;
+	background: #ffffff;
+	border: 1px solid #e5e7eb;
+	box-shadow: 0 4px 16px rgba(18, 140, 126, 0.08);
+}
+.wa-otp-modern__label {
+	display: block;
+	font-size: 12px;
+	font-weight: 600;
+	color: #475569;
+	margin-bottom: 6px;
+}
+.wa-otp-modern__input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px 12px;
+	border-radius: 10px;
+	border: 1.5px solid #e2e8f0;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+.wa-otp-modern__input:focus {
+	outline: none;
+	border-color: #25D366;
+}
+.wa-otp-modern__code-boxes .wa-otp-code {
+	letter-spacing: 6px;
+	font-size: 20px;
+	text-align: center;
+	font-weight: 700;
+}
+.wa-otp-modern__btn {
+	width: 100%;
+	padding: 11px 14px;
+	border: none;
+	border-radius: 10px;
+	background: linear-gradient(135deg, #25D366, #128C7E);
+	color: #fff;
+	font-weight: 700;
+	font-size: 14px;
+	cursor: pointer;
+	transition: opacity 0.15s ease, transform 0.05s ease;
+}
+.wa-otp-modern__btn:hover {
+	opacity: 0.92;
+}
+.wa-otp-modern__btn:active {
+	transform: scale(0.98);
+}
+.wa-otp-modern__btn:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+.wa-otp-modern__resend {
+	display: block;
+	width: 100%;
+	background: none;
+	border: none;
+	color: #128C7E;
+	font-size: 13px;
+	margin-top: 8px;
+	cursor: pointer;
+	text-align: center;
+}
+.wa-otp-modern__resend:disabled {
+	color: #94a3b8;
+	cursor: default;
+}
+.wa-otp-status {
+	font-size: 13px;
+	margin: 10px 0 0;
+	color: #16a34a;
+	min-height: 16px;
+}
+.wa-otp-status--error {
+	color: #dc2626;
+}

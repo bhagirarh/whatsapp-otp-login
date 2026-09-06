@@ -1,0 +1,21 @@
+.wa-otp-settings .wa-otp-card {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	padding: 20px;
+	margin: 20px 0;
+	max-width: 720px;
+}
+.wa-otp-settings .wa-otp-card h2 {
+	margin-top: 0;
+}
+.wa-otp-settings .wa-otp-usage-table td {
+	padding: 4px 12px 4px 0;
+}
+.wa-otp-settings .wa-otp-error {
+	color: #b32d2e;
+}
+.wa-otp-settings .wa-otp-signup-card {
+	border-color: #25D366;
+	background: #f3fbfa;
+}

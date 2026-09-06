@@ -1,0 +1,81 @@
+.wa-otp-card-style {
+	max-width: 360px;
+	margin: 16px 0;
+	border-radius: 14px;
+	overflow: hidden;
+	border: 1px solid #d1e7e2;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.wa-otp-card-style__header {
+	background: #25D366;
+	color: #fff;
+	padding: 14px 16px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-weight: 700;
+	font-size: 15px;
+}
+.wa-otp-card-style__icon {
+	display: inline-flex;
+}
+.wa-otp-card-style__body {
+	background: #fff;
+	padding: 18px 16px;
+}
+.wa-otp-card-style__label {
+	display: block;
+	font-size: 12px;
+	font-weight: 600;
+	color: #334155;
+	margin-bottom: 6px;
+}
+.wa-otp-card-style__input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px 12px;
+	border-radius: 8px;
+	border: 1px solid #cbd5e1;
+	font-size: 15px;
+	margin-bottom: 12px;
+}
+.wa-otp-card-style__btn {
+	width: 100%;
+	padding: 11px;
+	border: none;
+	border-radius: 8px;
+	background: #075E54;
+	color: #fff;
+	font-weight: 700;
+	font-size: 14px;
+	cursor: pointer;
+}
+.wa-otp-card-style__btn:hover {
+	background: #0b7369;
+}
+.wa-otp-card-style__btn:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+.wa-otp-card-style__resend {
+	display: block;
+	width: 100%;
+	background: none;
+	border: none;
+	color: #075E54;
+	text-decoration: underline;
+	font-size: 12px;
+	margin-top: 10px;
+	cursor: pointer;
+	text-align: center;
+}
+.wa-otp-status {
+	font-size: 13px;
+	margin: 10px 0 0;
+	color: #16a34a;
+	min-height: 16px;
+}
+.wa-otp-status--error {
+	color: #dc2626;
+}

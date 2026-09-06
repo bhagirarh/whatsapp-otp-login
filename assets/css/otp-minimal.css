@@ -1,0 +1,55 @@
+.wa-otp-minimal {
+	max-width: 320px;
+	margin: 14px 0;
+}
+.wa-otp-minimal__toggle-wrap {
+	margin: 8px 0;
+}
+.wa-otp-minimal__toggle {
+	font-size: 13px;
+	text-decoration: underline;
+	color: inherit;
+}
+.wa-otp-minimal__body {
+	margin-top: 8px;
+}
+.wa-otp-minimal__input {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 8px 10px;
+	margin-bottom: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+}
+.wa-otp-minimal__btn {
+	padding: 8px 14px;
+	border: 1px solid #128C7E;
+	background: #fff;
+	color: #128C7E;
+	border-radius: 4px;
+	font-size: 13px;
+	cursor: pointer;
+}
+.wa-otp-minimal__btn:hover {
+	background: #f3fbfa;
+}
+.wa-otp-minimal__btn:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+.wa-otp-minimal__resend {
+	display: inline-block;
+	margin-top: 6px;
+	font-size: 12px;
+}
+.wa-otp-status {
+	font-size: 12px;
+	margin: 8px 0 0;
+	color: #16a34a;
+	min-height: 14px;
+}
+.wa-otp-status--error {
+	color: #dc2626;
+}
